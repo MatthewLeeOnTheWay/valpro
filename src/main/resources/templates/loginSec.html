@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <li>
+        <a href="/logout">
+            <i class="fa fa-power-off"></i>
+        </a>
+    </li>
+    #parse("/common/header.html")
+    <div class="container-fluid">
+        <div class="box box-success">
+            <div class="box-header">
+                <h2>自动化测试平台(<a href="http://localhost:8090">LighSword</a>)</h2>
+            </div>
+
+            <div class="box-body">
+                <h3>登陆</h3>
+                <form name="f" action="/loginSec" method="POST">
+                    <table>
+                        <tr>
+                            <td>用户名：</td>
+                            <td><input type="text" name="username" value=""></td> </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td><input type="password" name="password"></td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input name="submit" type="submit" value="登录"/></td>
+                            <td></td>
+                        </tr>
+                        <!--<input name="_csrf" type="hidden" value="${_csrf}"/>-->
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('[name=f]').focus()
+        })
+    </script>
+#parse("/common/footer.html")
+</body>
+</html>

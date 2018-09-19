@@ -1,0 +1,6 @@
+create for: spring boot /jpa/security
+#首页/ : 所有人可访问
+#登录页 /login: 所有人可访问
+# 普通用户权限页 /httpapi, /httpsuite: 登录后的用户都可访问
+#管理员权限页 /httpreport ： 仅管理员可访问
+#无权限提醒页： 当一个用户访问了其没有权限的页面，我们使用全局统一的异常处理页
