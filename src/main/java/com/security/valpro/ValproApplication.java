@@ -8,5 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@MapperScan("com.security.valpro.dao")
 public class ValproApplication {
 
-	public static void main(String[] args) { SpringApplication.run(ValproApplication.class, args); }
+	public static void main(String[] args) { SpringApplication.run(ValproApplication.class, args);
+	}
 }

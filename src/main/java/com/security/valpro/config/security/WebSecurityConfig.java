@@ -26,7 +26,7 @@ import java.util.Set;
 
 //.antMatchers("/admin/**").hasRole("ROLE_ADMIN")
 @Configuration
-@EnableOAuth2Sso
+@ConfigurationEnableOAuth2Sso
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -54,7 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/amchart/**").permitAll()
                 .antMatchers("/amchart/**",
                         "/bootstrap/**",
                         "/build/**",
@@ -68,7 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .anyRequest().authenticated().and()
         .formLogin().loginPage("/loginSec")
         .defaultSuccessUrl("/httpapi").permitAll().and()
-        .logout().permitAll().logoutSuccessUrl("/");//退出默认的跳转页面
+        .logout().permitAll();//退出默认的跳转页面
+
+        http.logout().logoutSuccessUrl("/");
     }
 
 }

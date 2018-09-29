@@ -11,6 +11,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 //      （6）认证鉴权信息的Bean，采用我们自定义的从数据库中获取用户信息的LightSwordUserDetailService类。
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
         registry.addViewController("/loginSec").setViewName("/loginSec");
     }
 }

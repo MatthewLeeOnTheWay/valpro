@@ -2,6 +2,7 @@ package com.security.valpro.testSservice;
 
 import com.security.valpro.entity.SysRole;
 import com.security.valpro.entity.SysUser;
+import com.security.valpro.service.CacheManager;
 import com.security.valpro.service.CustomUserService;
 import com.security.valpro.utils.BaseJUnit4Test;
 import org.junit.Test;
@@ -16,6 +17,9 @@ public class BaseInfoService extends BaseJUnit4Test {
     @Autowired
     private CustomUserService customUserService;
 
+    @Autowired
+    private CacheManager cacheManager;
+
 
     @Test
     @Transactional
@@ -27,5 +31,9 @@ public class BaseInfoService extends BaseJUnit4Test {
         sysUser.setPassword("123456");
         sysUser.setRoles(sysRoles);
         sysUser.setUsername("matthew");
+    }
+    @Test
+    public void testCache(){
+
     }
 }
