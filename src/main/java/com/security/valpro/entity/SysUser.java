@@ -1,23 +1,16 @@
 package com.security.valpro.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import javax.annotation.Generated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class SysUser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String password;
 
-    private List<SysRole> roles;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getId() {
         return id;
     }
@@ -42,11 +35,5 @@ public class SysUser {
         this.password = password;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
 }

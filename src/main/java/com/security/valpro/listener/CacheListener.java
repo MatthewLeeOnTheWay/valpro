@@ -23,7 +23,7 @@ public class CacheListener {
                     for(String key:cacheManager.getAllKeys()){
                         if(cacheManager.isTimeOut(key)){
                             cacheManager.clearByKey(key);
-                            logger.info(key+"缓存被清除");
+                            logger.info(key+"缓存被清除------------------------------------------");
                         }
                     }
                 }

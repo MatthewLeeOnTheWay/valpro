@@ -13,19 +13,19 @@ import javax.persistence.PersistenceContext;
 public class BaseDaoImpl {
     @PersistenceContext
     private EntityManager entityManager;
-    @Autowired
+   /* @Autowired
     private SqlSessionFactory sqlSessionFactory;
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    /**
+    *//**
      * 获取HibernateSession
-     */
-   /* private Session getHibernateSession() {
+     *//*
+   *//* private Session getHibernateSession() {
         //获取Hibernate中的Session
         Session hibernateSession = entityManager.unwrap(org.hibernate.Session.class);
         return hibernateSession;
-    }*/
+    }*//*
 
     //获取Session
     private SqlSession getSession(){
@@ -43,6 +43,6 @@ public class BaseDaoImpl {
     private SqlSession getSessionTri(){
         SqlSession session=sqlSessionTemplate;
         return session;
-    }
+    }*/
 
 }

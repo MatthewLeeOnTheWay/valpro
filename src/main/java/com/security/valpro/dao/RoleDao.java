@@ -13,6 +13,6 @@ public interface RoleDao extends JpaRepository<SysRole,Integer> {
 
 //    @Query(value = "select * from xxx where if(?1 !='',x1=?1,1=1) and if(?2 !='',x2=?2,1=1)" +
 //            "and if(?3 !='',x3=?3,1=1)  ",nativeQuery = true)
-    @Query("select t from Task t where t.taskName = :taskName and t.createTime = :createTime")
-    SysRole findByTaskName(@Param("taskName")String taskName, @Param("createTime") Date createTime);
+//    @Query("select t from Task t where t.taskName = :taskName and t.createTime = :createTime")
+//    SysRole findByTaskName(@Param("taskName")String taskName, @Param("createTime") Date createTime);
 }

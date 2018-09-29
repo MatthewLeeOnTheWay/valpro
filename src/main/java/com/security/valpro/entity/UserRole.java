@@ -7,15 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class UserRole {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer id;
 
     private Integer userId;
 
     private Integer roleId;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getId() {
         return id;
     }
