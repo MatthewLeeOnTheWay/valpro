@@ -1,19 +1,18 @@
-package com.security.valpro;
+package com.security.valpro.listener;
 
 
-import com.security.valpro.entity.SysRole;
-import com.security.valpro.entity.SysUser;
+
+import com.security.valpro.ValproApplication;
 import com.security.valpro.listener.CacheListener;
 import com.security.valpro.service.CacheManager;
-import javafx.application.Application;
+import com.security.valpro.utils.ContentEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,8 @@ public class ValproApplicationTests {
 	private CacheManager cacheManager;
 	@Autowired
 	private CacheListener cacheListener;
-
+	@Autowired
+	private ApplicationContext applicationContext;
 	private Logger logger=Logger.getLogger(ValproApplication.class.getName());
 	@Test
 	public void contextLoads() {
@@ -80,6 +80,11 @@ public class ValproApplicationTests {
 			e.printStackTrace();
 		}
 		logger.info(cacheManager.getCacheDataByKey(key).toString());
+	}
+
+	@Test
+	public void testPublishEvent(){
+		applicationContext.publishEvent(new ContentEvent("news is update"));
 	}
 
 //	@Test

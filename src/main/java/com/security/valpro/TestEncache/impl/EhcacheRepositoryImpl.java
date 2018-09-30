@@ -2,7 +2,7 @@ package com.security.valpro.TestEncache.impl;
 
 import com.security.valpro.TestEncache.EhcacheRepository;
 import com.security.valpro.entity.SysRole;
-import com.security.valpro.jpaInterface.SysRoleRepository;
+import com.security.valpro.dao.SysRoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

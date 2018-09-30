@@ -1,4 +1,4 @@
-package com.security.valpro.jpaInterface;
+package com.security.valpro.dao;
 
 import com.security.valpro.entity.SysRole;
 import org.springframework.data.jpa.repository.JpaRepository;
