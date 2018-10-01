@@ -3,12 +3,11 @@ server:
   port: 8090
 #servlet.context-path: /hello
 logging:
-  file: /IdeaProjects/valpro/lemoon.log
+  file: ../logs/lemoon.log
   level:
     org:
       springframework:
         security: INFO
-
 
 #  oauth2:
 #    client:
@@ -65,3 +64,8 @@ spring:
   jackson:
     serialization:
       indent_output: true
+  rabbitmq:
+    host: localhost
+    port: 8080
+    username: guest
+    password: guest

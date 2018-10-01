@@ -45,6 +45,15 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
 
         <!--springboot-->
         <dependency>
@@ -156,7 +165,13 @@
             <version>2.0.3.RELEASE</version>
             <scope>test</scope>
         </dependency>
-
+        <!--协程-->
+        <!-- https://mvnrepository.com/artifact/org.db4j/kilim -->
+        <dependency>
+            <groupId>org.db4j</groupId>
+            <artifactId>kilim</artifactId>
+            <version>2.0.0-25</version>
+        </dependency>
     </dependencies>
 
     <build>
