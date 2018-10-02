@@ -8,7 +8,6 @@ logging:
     org:
       springframework:
         security: INFO
-
 #  oauth2:
 #    client:
 #      clientId: SampleClientId
@@ -17,7 +16,6 @@ logging:
 #      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
 #    resource:
 #      userInfoUri: http://localhost:8081/auth/user/me
-
 spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
@@ -36,7 +34,14 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
   thymeleaf:
-    cache: false
+    cache: true
+    encoding: utf-8
+    suffix: .html
+    prefix: classpath:/templates/
+    check-template: true
+    enabled: true
+    check-template-location: true
+    mode: html
   datasource:
     minIdle: 1
     validationQuery: select 'x'
