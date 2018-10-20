@@ -1,6 +1,8 @@
 package com.security.valpro.config.db;
 
+
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,9 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import javax.servlet.ServletRegistration;
 import javax.sql.DataSource;
-
 
 @Configuration
 public class DruidDataSourceConfig {

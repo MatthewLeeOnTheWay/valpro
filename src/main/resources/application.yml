@@ -1,7 +1,6 @@
 #springboot+mybatis+SpringSecurity
 server:
   port: 8090
-#servlet.context-path: /hello
 logging:
   file: ../logs/lemoon.log
   level:
@@ -43,8 +42,8 @@ spring:
     check-template-location: true
     mode: html
   datasource:
+    validationQuery: select count(*) from sys_user
     minIdle: 1
-    validationQuery: select 'x'
     initialSize: 1
     maxWait: 60000
     poolPreparedStatements: true
@@ -57,13 +56,15 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
     testOnReturn: false
     maxActive: 20
+
+
     tomcat:
       max-active: 100
       max-idle: 200
       initial-size: 20
     driver-class-name: com.mysql.cj.jdbc.Driver
     password:
-    url: jdbc:mysql://localhost:3305/rent?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3305/aliyun?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
 
   jackson:
