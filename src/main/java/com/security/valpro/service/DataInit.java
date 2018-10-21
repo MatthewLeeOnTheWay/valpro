@@ -1,16 +1,5 @@
 package com.security.valpro.service;
-
-import com.security.valpro.dao.RoleDao;
-import com.security.valpro.dao.UserDao;
-import com.security.valpro.dao.UserRoleDao;
-import com.security.valpro.entity.SysRole;
-import com.security.valpro.entity.SysUser;
-import com.security.valpro.entity.UserRole;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.UUID;
 
 @Service//初始化数据,项目启动时执行
 public class DataInit {

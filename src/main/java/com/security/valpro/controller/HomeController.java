@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
     @RequestMapping("/")
-    @PreAuthorize(value = "hasRole('admin')")
     public String index(Model model){
-        Msg msg=new Msg("测试标题","测试内容");
+        Msg msg=new Msg("测试标题","测试内容","测试信息");
         model.addAttribute("msg",msg);
-        return "home";
+        return "login";
     }
 
     @RequestMapping("/calculate")
@@ -25,5 +24,15 @@ public class HomeController {
     public int calCount(){
         PythonInterpreter interpreter=new PythonInterpreter();
         return 1;
+    }
+
+    @RequestMapping("/home")
+    public String userIndex(){
+        return "home";
+    }
+
+    @RequestMapping("/fail")
+    public String fail(){
+        return "home";
     }
 }

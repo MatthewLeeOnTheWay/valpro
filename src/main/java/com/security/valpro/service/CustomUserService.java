@@ -23,7 +23,7 @@ import java.util.List;
  * then god damn ok!
  * */
 @Service
-public class CustomUserService implements UserDetailsService{
+public class CustomUserService implements UserDetailsService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     UserDao userDao;
