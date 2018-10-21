@@ -1,41 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta content="text/html;charset=UTF-8"/>
-    <title>登录页面</title>
-    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-        }
-        .starter-template {
-            padding: 40px 15px;
-            text-align: center;
-        }
-    </style>
+    <title>Login</title>
 </head>
 <body>
+<div layout:fragment="content" th:remove="tag">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Spring Security演示</a>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Login page</h1>
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Invalid username or password.
+                    </div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">
+                        You have been logged out.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>:
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="login-submit"
+                                   id="login-submit"
+                                   class="form-control btn btn-info"
+                                   value="Log In">
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/}"> 首页 </a></li>
-
-            </ul>
-        </div><!--/.nav-collapse -->
     </div>
-</nav>
-<div class="container">
+
+    <p><a href="/" th:href="@{/}">Back to home page</a></p>
+
+</div>
+</body>
+</html>
+<!--<div class="container">
 
     <div class="starter-template">
-        <!--<p th:if="${param.logout}" class="bg-warning">已成功注销</p>
-        <p th:if="${param.error}" class="bg-danger">有错误，请重试</p> -->
+        &lt;!&ndash;<p th:if="${param.logout}" class="bg-warning">已成功注销</p>
+        <p th:if="${param.error}" class="bg-danger">有错误，请重试</p> &ndash;&gt;
         <h2>使用账号密码登录</h2>
-        <form name="form" th:action="@{/login}" action="/login" method="POST"> <!-- 3 -->
+        <form name="form" th:action="@{/login}" action="/login" method="POST"> &lt;!&ndash; 3 &ndash;&gt;
             <div class="form-group">
                 <input type="text" class="form-control" name="username" value="" placeholder="账号" />
             </div>
@@ -46,6 +76,5 @@
             <input name="_csrf" type="hidden" value="b2155184-80cf-48a2-b547-91bbe364c98e" />
         </form>
     </div>
-</div>
-</body>
-</html>
+</div>-->
+

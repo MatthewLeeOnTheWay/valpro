@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 //.antMatchers("/admin/**").hasRole("ROLE_ADMIN")
@@ -27,53 +28,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     UserDetailsService customUserService(){
         return new CustomUserService();
     }
-
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         /**
          * 内存用户名密码认证
-         *
+         */
         auth.inMemoryAuthentication()
                 .withUser("root")
                 .password("root")
-                .roles("USER");*/
-        auth.userDetailsService(customUserService());
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password("admin123")
+                .roles("admin");
+//        auth.userDetailsService(customUserService());
     }
 
     protected void configure(HttpSecurity http)throws Exception{
 
 
-        http.csrf().disable()
+        http
                 .authorizeRequests()
-                .antMatchers("/amchart/**",
-                        "/bootstrap/**",
-                        "/build/**",
-                        "/css/**",
-                        "/dist/**",
-                        "/documentation/**",
-                        "/fonts/**",
-                        "/js/**",
-                        "/pages/**",
-                        "/plugins/**").permitAll()  // 允许访问资源
                 .antMatchers("/", "/home", "/about").permitAll() //允许访问这三个路由
+                .antMatchers("/user").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                    .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/home")
-                    .failureForwardUrl("/fail")
                     .permitAll()
-                    .and()
-                .logout()
-                    .logoutSuccessUrl("/login")
+                .and()
+                    .logout()
                     .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout")
                     .permitAll()
                     .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);           //自定义异常处理
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and().csrf().disable();
     }
-
-
-
-
-
 }

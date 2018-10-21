@@ -1,55 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta content="text/html;charset=UTF-8"/>
-    <title sec:authentication="name"></title>
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-        }
-        .starter-template {
-            padding: 40px 15px;
-            text-align: center;
-        }
-    </style>
+    <title>Home</title>
 </head>
 <body>
-    <th:block th:replace="pages/header ::header"/>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Spring Security演示</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/}"> 首页 </a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
+<div layout:fragment="content" th:remove="tag">
+    <h1>Hello Spring Security</h1>
+    <p>This is an unsecured page, but you can access the secured pages after authenticating.</p>
+    <ul>
+        <li>Go to the <a href="/user" th:href="@{/user}">secured pages</a></li>
+    </ul>
+</div>
+</body>
+</html>
 
 
-    <div class="container">
+    <!--<div class="container">
         <div class="starter-template">
             <h1 th:text="${msg.title}"></h1>
 
             <p class="bg-primary" th:text="${msg.content}"></p>
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+            <div sec:authorize="hasRole('ROLE_ADMIN')"> &lt;!&ndash; 用户类型为ROLE_ADMIN 显示 &ndash;&gt;
             <p class="bg-info" th:text="${msg.extraInfo}"></p>
         </div>
 
-        <div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为 ROLE_USER 显示 -->
+        <div sec:authorize="hasRole('ROLE_USER')"> &lt;!&ndash; 用户类型为 ROLE_USER 显示 &ndash;&gt;
             <p class="bg-info">无更多信息显示</p>
         </div>
 
         <form th:action="@{/logout}" method="post">
             <input type="submit" class="btn btn-primary" value="注销"/>
         </form>
-    </div>
-
-</div>
-
-</body>
-</html>
+    </div>-->

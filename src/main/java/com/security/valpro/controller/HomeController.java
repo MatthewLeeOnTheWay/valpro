@@ -1,10 +1,7 @@
 package com.security.valpro.controller;
 
-import com.security.valpro.entity.Msg;
-import org.python.util.PythonInterpreter;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,26 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
     @RequestMapping("/")
-    public String index(Model model){
-        Msg msg=new Msg("测试标题","测试内容","测试信息");
-        model.addAttribute("msg",msg);
+    public String index(){
+        return "home";
+    }
+
+    @RequestMapping("/user")
+    public String userIndex(){
+        return "user/home";
+    }
+
+    @RequestMapping("/login")
+    public String login(){
         return "login";
     }
 
-    @RequestMapping("/calculate")
-    @PreAuthorize(value="hasAnyRole('admin','user')")
-    public int calCount(){
-        PythonInterpreter interpreter=new PythonInterpreter();
-        return 1;
-    }
-
-    @RequestMapping("/home")
-    public String userIndex(){
-        return "home";
-    }
-
-    @RequestMapping("/fail")
-    public String fail(){
-        return "home";
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "error/access-denied";
     }
 }
