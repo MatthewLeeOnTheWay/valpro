@@ -12,7 +12,7 @@ import java.util.List;
 public class GlobalExceptionHandlerAdvice {
     @ExceptionHandler(value = Exception.class)
     ModelAndView exception(Exception exception, WebRequest request){
-        ModelAndView modelAndView=new ModelAndView("/error");
+        ModelAndView modelAndView=new ModelAndView("/access-denied");
         modelAndView.addObject("errorMessage",exception.getMessage());
         modelAndView.addObject("stackTrace",exception.getStackTrace());
         return modelAndView;

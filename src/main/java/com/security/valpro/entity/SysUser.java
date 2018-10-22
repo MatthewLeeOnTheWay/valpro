@@ -129,4 +129,9 @@ public class SysUser {
     this.lastUpdateDate = lastUpdateDate;
   }
 
+    public SysUser (String username,String password){
+      this.username=username;
+      this.password=password;
+    }
+
 }

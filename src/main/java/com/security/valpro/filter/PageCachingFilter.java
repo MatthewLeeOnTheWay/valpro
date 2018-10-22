@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
-@WebFilter(filterName="testFilter1",urlPatterns = {"/*"})
+//@WebFilter(filterName="testFilter1",urlPatterns = {"/*"})
 @Order(FilterRegistrationBean.LOWEST_PRECEDENCE-1)
 public class PageCachingFilter extends SimplePageCachingFilter {
     private final static String FILTER_URL_PATTERNS = "patterns";
