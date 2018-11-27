@@ -7,6 +7,7 @@ import com.security.valpro.entity.SysRole;
 import com.security.valpro.entity.SysUser;
 import com.security.valpro.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,9 +16,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.thymeleaf.util.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,7 +49,7 @@ public class CustomUserService implements UserDetailsService {
         }
 
         List<SimpleGrantedAuthority> authorities=new ArrayList<SimpleGrantedAuthority>();
-        List<UserRole> userRoles=userRoleDao.listByUserId(user.getId());
+        /*List<UserRole> userRoles=userRoleDao.listByUserId(user.getId());
 
         for (UserRole userRole:userRoles){
             Integer roleId=userRole.getRoleId();
@@ -55,7 +60,13 @@ public class CustomUserService implements UserDetailsService {
             }
 
             System.err.println("username is"+username+","+roleName);
+        }*/
+        String roleName=user.getRole();
+        if(!StringUtils.isEmpty(roleName)){
+            authorities.add(new SimpleGrantedAuthority(roleName));
         }
+
         return new User(username,user.getPassword(),authorities);
     }
+
 }

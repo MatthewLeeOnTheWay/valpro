@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head/>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<div class="container">
+<div layout:fragment="content" th:remove="tag">
     <div class="starter-template">
         <h1>游客页面 无需登录</h1>
     </div>

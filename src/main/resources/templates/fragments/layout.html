@@ -6,22 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/vue/2.5.16/vue.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/vue.min.js}"></script>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/static/main.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.4.1/css/fontawesome.min.css}"/>
-    <link rel="icon" href="/static/images/logo.png">
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Spring Security Thymeleaf</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}"/>
+    <link rel="icon" th:href="@{/static/images/logo.png}">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Bobo</title>
 </head>
 <body>
-<th:block th:replace="fragments/header :: header"/>
-<div class="container">
-    <th:block layout:fragment="content"/>
-</div>
-<th:block th:replace="fragments/footer :: footer"/>
+    <div style="height: 100%">
+        <th:block th:replace="fragments/header :: header"/>
+        <div class="container">
+            <th:block layout:fragment="content"/>
+        </div>
+        <th:block th:replace="fragments/footer :: footer"/>
+    </div>
+
 </body>
 </html>

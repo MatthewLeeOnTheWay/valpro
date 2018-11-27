@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
 <head>
-    <meta charset="UTF-8">
     <title>错误页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 </head>
 <body>
+    <div layout:fragment="content" th:remove="tag">
+        <h1 style="text-align: left">错误信息：</h1>
+        <div th:text="${errorMessage}" style="text-align: left;color: red"></div><br/>
+
+        <h1 style="text-align: left">堆栈信息：</h1>
+        <div th:each="trace:${stackTrace}" style="text-align: left ;color: red">
+            <div th:text="${trace}" style="text-align: left"></div>
+        </div>
+
+        <script type="text/javascript" th:src="@{/static/js/pages/error.js}"></script>
+    </div>
+
 
 </body>
 </html>

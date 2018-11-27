@@ -3,6 +3,8 @@ package com.security.valpro.listener;
 
 
 import com.security.valpro.ValproApplication;
+import com.security.valpro.dao.UserDao;
+import com.security.valpro.entity.SysUser;
 import com.security.valpro.listener.CacheListener;
 import com.security.valpro.service.CacheManager;
 import com.security.valpro.utils.ContentEvent;
@@ -32,6 +34,16 @@ public class ValproApplicationTests {
 	@Autowired
 	private ApplicationContext applicationContext;
 	private Logger logger=Logger.getLogger(ValproApplication.class.getName());
+
+	@Autowired
+	private UserDao userDao;
+
+	@Test
+	public void testUserDao(){
+		String username="maJohn";
+		SysUser user=userDao.findByUsername(username);
+		System.out.println(user.getMobile());
+	}
 	@Test
 	public void contextLoads() {
 	}

@@ -14,20 +14,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-//.antMatchers("/admin/**").hasRole("ROLE_ADMIN")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
+// 这个注解，可以开启security的注解，我们可以在需要控制权限的方法上面使用@PreAuthorize，@PreFilter这些注解。
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private static Logger logger= LoggerFactory.getLogger(WebSecurityConfig.class);
     @Autowired
     private CustomAccessDeniedHandler accessDeniedHandler;
     @Bean
-    UserDetailsService customUserService(){
+    public UserDetailsService customUserService(){
         return new CustomUserService();
     }
     @Autowired
@@ -45,16 +44,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .roles("admin");*/
         auth.userDetailsService(customUserService()).passwordEncoder(new BCryptPasswordEncoder());
     }
+
     public void configure(WebSecurity web){
-        web.ignoring().antMatchers("/css/**","/images/**","/js/**","/static/**");
+        web.ignoring().antMatchers("/", "/static/**","/register","/registration","/login_error","/about","/error");
     }
+
     protected void configure(HttpSecurity http)throws Exception{
-
-
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/about","/registry","/sign_up").permitAll() //允许访问这三个路由
-                .antMatchers("/user").hasAnyRole("ROLE_USER")
+                .antMatchers("/user").hasAnyRole("ROLE_USER","ROLE_ADMIN")
+                .antMatchers("/admin").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()

@@ -1,22 +1,25 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
 <head>
     <title>Spring Boot Thymeleaf + Spring Security</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{static/main.css}"/>
-    <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <script type="text/javascript" th:src="@{/static/js/pages/main.js}"></script>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<div class="container">
-    <div class="starter-template">
+<div layout:fragment="content" th:remove="tag">
+    <div class="starter-template" style="text-align: left">
         <h1>Spring Boot + Thymeleaf + Spring Security 示例</h1>
         <h2>1. 打开 <a th:href="@{/admin}">管理员页面 (受 Spring Security 保护, 需要管理员权限)</a></h2>
         <h2>2. 打开 <a th:href="@{/user}">用户页面 (受 Spring Security 保护, 需要用户权限)</a></h2>
         <h2>3. 打开 <a th:href="@{/about}">游客页面</a></h2>
+        <p class="text-muted">或者你还没有账号，点此<a th:href="@{/register}">注册</a></p>
     </div>
 </div>
-<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

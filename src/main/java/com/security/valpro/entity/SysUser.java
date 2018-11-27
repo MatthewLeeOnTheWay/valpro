@@ -1,11 +1,18 @@
 package com.security.valpro.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.security.valpro.utils.DateJsonDeserialize;
+import com.security.valpro.utils.DateJsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
-@Entity
+@Entity(name = "sysUser")
 public class SysUser {
     private Integer id;
     private String password;
@@ -14,124 +21,131 @@ public class SysUser {
     private String salt;
     private String email;
     private String address;
-    private java.sql.Timestamp birthday;
-    private java.sql.Timestamp creationDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+
+    private Date creationDate;
     private String createdBy;
     private String lastUpdateBy;
-    private java.sql.Timestamp lastUpdateDate;
+
+    private Date lastUpdateDate;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getId() {
-    return id;
-  }
+        return id;
+    }
 
     public void setId(Integer id) {
-    this.id = id;
-  }
+        this.id = id;
+    }
 
 
     public String getPassword() {
-    return password;
-  }
+        return password;
+    }
 
     public void setPassword(String password) {
-    this.password = password;
-  }
+        this.password = password;
+    }
 
 
     public String getUsername() {
-    return username;
-  }
+        return username;
+    }
 
     public void setUsername(String username) {
-    this.username = username;
-  }
+        this.username = username;
+    }
 
 
     public String getMobile() {
-    return mobile;
-  }
+        return mobile;
+    }
 
     public void setMobile(String mobile) {
-    this.mobile = mobile;
-  }
+        this.mobile = mobile;
+    }
 
 
     public String getSalt() {
-    return salt;
-  }
+        return salt;
+    }
 
     public void setSalt(String salt) {
-    this.salt = salt;
-  }
+        this.salt = salt;
+    }
 
 
     public String getEmail() {
-    return email;
-  }
+        return email;
+    }
 
     public void setEmail(String email) {
-    this.email = email;
-  }
+        this.email = email;
+    }
 
 
     public String getAddress() {
-    return address;
-  }
+        return address;
+    }
 
     public void setAddress(String address) {
-    this.address = address;
-  }
+        this.address = address;
+    }
 
 
-    public java.sql.Timestamp getBirthday() {
-    return birthday;
-  }
+    public Date getBirthday() {
+        return birthday;
+    }
 
-    public void setBirthday(java.sql.Timestamp birthday) {
-    this.birthday = birthday;
-  }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
 
-    public java.sql.Timestamp getCreationDate() {
-    return creationDate;
-  }
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-    public void setCreationDate(java.sql.Timestamp creationDate) {
-    this.creationDate = creationDate;
-  }
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
 
     public String getCreatedBy() {
-    return createdBy;
-  }
+        return createdBy;
+    }
 
     public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
+        this.createdBy = createdBy;
+    }
 
 
     public String getLastUpdateBy() {
-    return lastUpdateBy;
-  }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-    this.lastUpdateBy = lastUpdateBy;
-  }
-
-
-    public java.sql.Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-    public void setLastUpdateDate(java.sql.Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-    public SysUser (String username,String password){
-      this.username=username;
-      this.password=password;
+        return lastUpdateBy;
     }
 
+    public void setLastUpdateBy(String lastUpdateBy) {
+        this.lastUpdateBy = lastUpdateBy;
+    }
+
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
 }

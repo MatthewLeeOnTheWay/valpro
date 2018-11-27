@@ -1,21 +1,20 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-</head>
 <body>
-<div th:fragment="footer">
-    <div class="container">
-        <footer>
-        <!-- this is footer -->
-        © 2017 ThinkingInGIS
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">登出</a>
-            </span>
-        </footer>
-    </div>
-</div>
+<th:block th:fragment="footer">
+    <footer>
+        <div class="container">
+            <p style="_position: absolute;position: fixed;height: 50px;z-index: 999; bottom: 0;width: 100%">
+                &copy; ThinkingInJava.com
+                <span sec:authorize="isAuthenticated()" style="display: inline-block;">
+                    | Logged user: <span sec:authentication="name"></span> |
+                    Roles: <span sec:authentication="principal.authorities"></span> |
+                    <a th:href="@{/logout}">Sign Out</a>
+                </span>
+            </p>
+        </div>
+    </footer>
+</th:block>
 </body>
 </html>
