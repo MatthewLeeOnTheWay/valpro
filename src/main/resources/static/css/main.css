@@ -3,24 +3,18 @@ h1 {
 }
 
 footer {
-    _position: absolute;
-    position: fixed;
-    height: 50px;
-    z-index: 999;
-    bottom: 0;
     width: 100%;
-    background-color: #ccc
 }
 
 footer p {
     _position: absolute;
+    text-align: left ;
     position: fixed;
     height: 50px;
     z-index: 999;
     bottom: 0;
     width: 100%;
     background-color: #ccc
-
 }
 
 body {

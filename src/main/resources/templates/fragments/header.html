@@ -15,53 +15,10 @@
                         <a th:href="@{/}">Home</a>
                     </li>
                 </ul>
+                <p class="text-muted" style="text-align: right;z-index:0">或者你还没有账号，点此<a th:href="@{/register}">注册</a></p>
             </div>
-            <!--<div>
-                <button id="displaysign" onclick="start()">点击登录</button>
-            </div>-->
         </div>
     </nav>
-
-    <div class="signform" id="signform" style="display: none">
-        <div class="signclose">
-            <img src="image/signclose.ico" width="35px" height="35px" onclick="signclose()">
-        </div>
-        <div class="userdiv">
-            <input id="user" class="signinput" type="text" placeholder="用户名" name="user" >
-        </div>
-        <div class="pwddiv">
-            <input id="pwd" class="signinput" type="password" placeholder="密码" name="pwd">
-        </div>
-        <div class="postdiv">
-            <button>登录</button>
-        </div>
-        <br>
-        <div class="change" style="color: #4d4d4d">
-            <p>还没有账号?赶快<a href="#" style="text-decoration: none;color: #43A047">注册</a>一个吧</p>
-        </div>
-    </div>
-    <div class="signform" id="registerform" style="display: none">
-        <div class="signclose">
-            <img src="image/signclose.ico" width="35px" height="35px" onclick="signclose()">
-        </div>
-        <div class="userdiv">
-            <input  id="registeruser" class="signinput" onblur="loading()" type="text" placeholder="用户名" name="user">
-        </div>
-        <img src="image/signloading.gif" style="display: none" id="registerloading">
-        <div class="pwddiv">
-            <input  id="registerpwd" class="signinput" type="password" placeholder="密码" name="pwd">
-        </div>
-        <div class="pwddiv">
-            <input  id="registerrepwd" class="signinput" type="password" placeholder="再次输入密码" name="pwd">
-        </div>
-        <div class="postdiv">
-            <button>注册</button>
-        </div>
-        <br>
-        <div class="change" style="color: #4d4d4d">
-            <p>已有账号?立刻去<a href="#" style="text-decoration: none;color: #43A047">登录</a>吧</p>
-        </div>
-    </div>
 </th:block>
 </body>
 </html>

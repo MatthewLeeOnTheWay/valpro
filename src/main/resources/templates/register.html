@@ -12,39 +12,171 @@
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap-datetimepicker.min.css}"/>
     <div class="row" style="margin-top:20px">
-        <form th:action="@{/registration}" method="post">
-            <fieldset>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" required="true" autofocus="true" name="username">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" required="true" v-model="password" placeholder="密码：6-16位字母">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="pwdSecond" class="form-control" required="true" placeholder="重复输入密码：">
-                </div>
-                <div class="form-group">
-                    <input type="number" name="mobile" class="form-control" placeholder="手机号码：">
-                </div>
-                <div class="iform-group date start_date_picker">
-                    <input  name="birthday" placeholder="生日日期" id="blrz-entry-date-start" type="text" class="form-control">
-                </div>
-                <div class="form-group" style="text-align: left;">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox">我已阅读并接受<a href="#">注册条款</a>
-                        </label>
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap-datetimepicker.min.css}"/>
+            <form th:action="@{/glee/registration}" method="post" id="app" onsubmit="return checkForm()">
+                <fieldset>
+                    <div v-show="nameValid">
+                        <div class="alert alert-danger">
+                            昵称重复，请重新指定！
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-warning" style="width:340px;">立即注册</button>
-            </fieldset>
-        </form>
-        <script type="text/javascript" th:src="@{/static/js/bootstrap-datetimepicker.min.js}"></script>
-        <script type="text/javascript" th:src="@{/static/js/bootstrap-datetimepicker.zh-CN.js}"></script>
-        <script type="text/javascript" th:src="@{/static/js/pages/register.js}"></script>
+                    <div v-show="mobileValid">
+                        <div class="alert alert-danger">
+                            手机号码已被注册过！
+                        </div>
+                    </div>
+                    <div v-show="passwordValid">
+                        <div class="alert alert-danger">
+                            前后密码不一致，请重新检查！
+                        </div>
+                    </div>
+                    <div v-show="recptYes===false">
+                        <div class="alert alert-danger">
+                            请先接受注册条款！
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="昵称：" required="true" autofocus="true"
+                               name="username" v-model="username" v-on:blur="getUserName('name')">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" required="true"
+                               placeholder="密码：6-16位字母" v-model="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwdSecond" class="form-control" required="true"
+                               placeholder="重复输入密码：" v-model="pwdSecond">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="mobile" class="form-control" placeholder="手机号码：" v-model="mobile"
+                               v-on:blur="getMobile('mobile')">
+                    </div>
+                    <div class="form-group date start_date_picker">
+                        <input name="birthday" placeholder="生日日期" id="blrz-entry-date-start" type="text"
+                               class="form-control">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="recptYes">我已阅读并接受<a href="#">注册条款</a>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning" style="width:340px;" id="btnSubmit">立即注册</button>
+                    <div v-show="formValid">
+                        <div class="alert alert-danger">
+                            请先修改表单中提示的错误！
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <script type="text/javascript" th:src="@{/static/js/bootstrap-datetimepicker.min.js}"></script>
+            <script type="text/javascript" th:src="@{/static/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+        </div>
     </div>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                username: "",
+                password: "",
+                pwdSecond: "",
+                mobile: "",
+                recptYes: true,
+                nameValid: false,
+                mobileValid: false,
+                passwordValid: false,
+                name: "",
+                formValid: false
+            },
+            methods: {
+                getUserName: function (message) {
+                    var name = this.username;
+                    if (name != undefined && name != null) {
+                        postName(name);
+                    }
+                },
+                getMobile: function (message) {
+                    var mobile = this.mobile;
+                    if (mobile != null && mobile != undefined) {
+                        postMobile(mobile)
+                    }
+                },
+                checkForm: function () {
+                    var passwordValid=this.passwordValid;
+                    var nameValid=this.nameValid;
+                    var mobileValid=this.mobileValid;
+                    var recptYes=this.recptYes;
+                    debugger;
+                    if(!passwordValid&&!nameValid&&!mobileValid&&recptYes){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            },
+            watch: {
+                pwdSecond: function (val) {
+                    var pwdSecond = val;
+                    var password = this.password;
+                    if (password == pwdSecond) {
+                        vue.passwordValid = false;//隐藏警告字段
+                    } else {
+                        vue.passwordValid = true;
+                    }
+                }
+            }
+        });
+
+        $("#blrz-entry-date-start").datetimepicker({//选择年月日
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,//显示‘今日’按钮
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+
+            forceParse: 0
+        });
+
+        function postMobile(mobile) {
+            $.ajax({
+                type: 'POST',
+                url: '/check/checkMobile',
+                dataType: 'json',
+                data: {
+                    mobile: mobile
+                },
+                success: function (response) {
+                    var result = $.parseJSON(response);//后台返回的json数据需要转为对象
+                    vue.mobileValid = result;//把后台返回的JSON数据赋给selectById
+                },
+                error: function () {
+                    alert("错误");
+                }
+
+            });
+        }
+
+        function postName(name) {
+            $.post("/check/checkName", {
+                    username: name
+                },
+                function (data, status) {
+                    var result = $.parseJSON(data);//后台返回的json数据需要转为对象
+                    vue.nameValid = result;
+                });
+        }
+        function checkForm() {
+            var value=vue.checkForm();
+            return value;
+        }
+    </script>
 </div>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}"/>
     <link rel="icon" th:href="@{/static/images/logo.png}">
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Bobo</title>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">BoBo</title>
 </head>
 <body>
     <div style="height: 100%">
@@ -22,8 +22,7 @@
         <div class="container">
             <th:block layout:fragment="content"/>
         </div>
-        <th:block th:replace="fragments/footer :: footer"/>
     </div>
-
+    <th:block th:replace="fragments/footer :: footer"/>
 </body>
 </html>

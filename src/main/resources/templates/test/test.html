@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <title>注册页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div id="app">
+        <!-- `greet` 是在下面定义的方法名 -->
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <div id="apply">
+        <p>{{username}}</p>
+        <input type="text" class="form-control" placeholder="昵称：" required="true" autofocus="true"
+               name="username" v-model="username" v-on:blur="getUserName('name')">
+    </div>
+    <script >
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: 'Vue.js'
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+                greet: function (event) {
+                    // `this` 在方法里指当前 Vue 实例
+                    alert('Hello ' + this.name + '!')
+                    // `event` 是原生 DOM 事件
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                }
+            }
+        })
+
+        var vue = new Vue({
+            el: "#apply",
+            data: {
+                username: "",
+                password: "",
+                pwdSecond: "",
+                mobile: "",
+                recptYes: true,
+                nameValid: false,
+                mobileValid: false,
+                name: ""
+            },
+            methods: {
+                getUserName: function (message) {
+                    var name = this.username;
+                    if (name != undefined && name != null) {
+                        postName(name);
+                    }
+                },
+                getMobile: function (message) {
+                    var mobile = this.mobile;
+                    if (mobile != null && mobile != undefined) {
+                        postMobile(mobile)
+                    }
+                }
+
+            }
+        })
+
+        function postName(name) {
+            $.post("/checkName", {
+                    name: '123131'
+                },
+                function (data, status) {
+                    alert("你现在终于看到我了:" + data)
+                    var result = $.parseJSON(data);//后台返回的json数据需要转为对象
+                });
+        };
+    </script>
+</div>
+</body>
+</html>

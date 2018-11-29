@@ -21,7 +21,34 @@
             <div th:text="${trace}" style="text-align: left"></div>
         </div>
 
-        <script type="text/javascript" th:src="@{/static/js/pages/error.js}"></script>
+        <div id="app">
+            <ul>
+                <li v-for="value in object">
+                    {{ value }}
+                </li>
+            </ul>
+
+            <button v-on:click="counter += 1">增加 1</button>
+            <p>这个按钮被点击了 {{ counter }} 次。</p>
+            <input type="text" name="name" v-model="selectById.name" > //v-model实现数据的双向绑定
+        </div>
+
+
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    selectById : "",
+                    object: {
+                        name: '菜鸟教程',
+                        url: 'http://www.runoob.com',
+                        slogan: '学的不仅是技术，更是梦想！'
+                    },
+                    counter: 0
+                }
+            })
+        </script>
     </div>
 
 

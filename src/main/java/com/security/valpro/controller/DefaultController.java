@@ -1,11 +1,14 @@
 package com.security.valpro.controller;
 
 import com.security.valpro.dao.UserDao;
-import com.security.valpro.entity.SysUser;
 import com.security.valpro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class DefaultController {
     @Autowired
@@ -23,11 +26,13 @@ public class DefaultController {
         return "/home";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public String admin() {
         return "/admin";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
     public String user() {
         return "/user";
@@ -38,9 +43,17 @@ public class DefaultController {
         return "/about";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "/login";
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request) {
+        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth instanceof AnonymousAuthenticationToken){
+            return "login";
+        }else{
+            //获取请求过来的验证对象，名字以及角色正确才能访问到相应权限的页面
+            String path0=request.getServletPath();
+            return "user";
+        }*/
+        return "login";
     }
 
     @GetMapping("/403")
@@ -48,31 +61,5 @@ public class DefaultController {
         return "/error/403";
     }
 
-    @GetMapping("/register")
-    public String regist(){
-	 return "register";
-    }
 
-    @RequestMapping("/error_test")
-    public String errorHandler(){
-        return "/error/error";
-    }
-
-    @PostMapping("/registration")
-    public String registration(SysUser user){
-	    String mobile=user.getMobile();
-	    int i=userService.findByMobile(mobile);
-	    if(i>0){
-	        return "redirect:/login_error";
-        }else{
-            userService.saveCommonUser(user);
-            return "/user";
-        }
-    }
-
-    @RequestMapping(value = "/login_error")
-    @ResponseBody
-    public String rsError(){
-	    return "注册失败，当前手机号码已经被注册过！";
-    }
 }

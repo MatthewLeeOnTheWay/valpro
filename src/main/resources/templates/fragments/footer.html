@@ -3,14 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 <th:block th:fragment="footer">
-    <footer>
+    <footer style="background-color: #ccc">
         <div class="container">
-            <p style="_position: absolute;position: fixed;height: 50px;z-index: 999; bottom: 0;width: 100%">
+            <p>
                 &copy; ThinkingInJava.com
                 <span sec:authorize="isAuthenticated()" style="display: inline-block;">
-                    | Logged user: <span sec:authentication="name"></span> |
-                    Roles: <span sec:authentication="principal.authorities"></span> |
-                    <a th:href="@{/logout}">Sign Out</a>
+                    | 当前登陆用户: <span sec:authentication="name"></span>
+                    <!--角色: <span sec:authentication="principal.authorities"></span> |-->
+                    <a th:href="@{/logout}">退出</a>
                 </span>
             </p>
         </div>

@@ -18,6 +18,9 @@ public interface UserDao extends JpaRepository<SysUser,Integer>, PagingAndSortin
 
     @Query(value="select count(*) from sys_user where MOBILE=:mobile",nativeQuery = true)
     int findByMobile(@Param("mobile")String mobile);
+
+    @Query(value= "select count(*) from sys_user where username=:username",nativeQuery = true)
+    int findUsernameExist(@Param("username")String username);
     /*
     * @RequestMapping(value = "/params", method=RequestMethod.GET)
         public Page<Blog> getEntryByParams(@RequestParam(value = "page", defaultValue = "0") Integer page,

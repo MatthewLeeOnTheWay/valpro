@@ -17,7 +17,12 @@
             <form th:action="@{/login}" method="post">
                 <fieldset>
                     <h1>登录</h1>
-                    <p class="text-muted">或者你还没有账号，点此<a th:href="@{/register}">注册</a></p>
+                    <div>
+                        <p class="text-muted" th:if="${registerInfo==null}">或者你还没有账号，点此<a th:href="@{/register}">注册</a></p>
+                    </div>
+                    <div>
+                        <p class="text-muted" th:text="${registerInfo}"></p>
+                    </div>
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">
                             Invalid username and password.
