@@ -17,22 +17,22 @@
             <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap-datetimepicker.min.css}"/>
             <form th:action="@{/glee/registration}" method="post" id="app" onsubmit="return checkForm()">
                 <fieldset>
-                    <div v-show="nameValid">
+                    <div v-show="nameValid" style="display: none">
                         <div class="alert alert-danger">
                             昵称重复，请重新指定！
                         </div>
                     </div>
-                    <div v-show="mobileValid">
+                    <div v-show="mobileValid" style="display: none">
                         <div class="alert alert-danger">
                             手机号码已被注册过！
                         </div>
                     </div>
-                    <div v-show="passwordValid">
+                    <div v-show="passwordValid" style="display: none">
                         <div class="alert alert-danger">
                             前后密码不一致，请重新检查！
                         </div>
                     </div>
-                    <div v-show="recptYes===false">
+                    <div v-show="recptYes===false" style="display: none">
                         <div class="alert alert-danger">
                             请先接受注册条款！
                         </div>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-warning" style="width:340px;" id="btnSubmit">立即注册</button>
-                    <div v-show="formValid">
+                    <div v-show="formValid" style="display: none">
                         <div class="alert alert-danger">
                             请先修改表单中提示的错误！
                         </div>
