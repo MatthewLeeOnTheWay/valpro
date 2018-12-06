@@ -1,17 +1,12 @@
 package com.security.valpro.dao;
 
 import com.security.valpro.entity.SysUser;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-@Repository
+
 public interface UserDao extends JpaRepository<SysUser,Integer>, PagingAndSortingRepository<SysUser,Integer>, JpaSpecificationExecutor<SysUser> {
 
     SysUser findByUsername(String name);
@@ -21,6 +16,8 @@ public interface UserDao extends JpaRepository<SysUser,Integer>, PagingAndSortin
 
     @Query(value= "select count(*) from sys_user where username=:username",nativeQuery = true)
     int findUsernameExist(@Param("username")String username);
+
+    SysUser findById(int id);
     /*
     * @RequestMapping(value = "/params", method=RequestMethod.GET)
         public Page<Blog> getEntryByParams(@RequestParam(value = "page", defaultValue = "0") Integer page,

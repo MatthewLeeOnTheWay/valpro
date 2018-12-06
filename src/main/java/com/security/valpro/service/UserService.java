@@ -91,4 +91,12 @@ public class UserService {
         user.setRole("ROLE_USER");
         userDao.save(user);
     }
+
+    public SysUser findById(int id){
+        return userDao.findById(id);
+    }
+
+    public void save(SysUser user){
+        userDao.save(user);
+    }
 }

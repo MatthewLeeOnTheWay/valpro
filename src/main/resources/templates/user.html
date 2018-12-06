@@ -11,6 +11,48 @@
     <div class="starter-template" style="text-align: left">
         <h1>普通用户页面 (受 Spring Security 保护, 需要用户权限)</h1>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <table class="table table-hover table-condensed">
+            <legend>
+                <strong>用户列表</strong>
+            </legend>
+            <thead>
+            <tr>
+                <th>库存点代号</th>
+                <th>储位</th>
+                <th>货色号</th>
+                <th>尺寸</th>
+                <th>库存量</th>
+                <th>在途量</th>
+                <th>预移入量</th>
+                <th>预移出量</th>
+                <th>预批出量</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>最后修改人</th>
+                <th>最后修改时间</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stock : ${mdStocks}">
+                <th scope="row" th:text="${stock.MDPOTNO}"></th>
+                <td th:text="${stock.STORAGENO}"></td>
+                <td th:text="${stock.PRODUCT}"></td>
+                <td th:text="${stock.MDSIZE}"></td>
+                <td th:text="${stock.STKQTY}"></td>
+                <td th:text="${stock.ONWAYQTY}"></td>
+                <td th:text="${stock.PTRINQTY}"></td>
+                <td th:text="${stock.PTROUTQTY}"></td>
+                <td th:text="${stock.PWHSOUTQTY}"></td>
+                <td th:text="${stock.CREATED_BY}"></td>
+                <td th:text="${stock.CREATION_DATE}"></td>
+                <td th:text="${stock.LAST_UPDATE_BY}"></td>
+                <td th:text="${stock.LAST_UPDATE_DATE}"></td>
+                <td th:text="${stock.REMARK}"></td>
+                <td><a class="btn btn-danger" th:href="@{/users/delete/{stockId}(stockId=${stock.id})}">删除</a></td>
+            </tr>
+            </tbody>
+        </table>
         <form th:action="@{/logout}" method="post">
             <input type="submit" class="btn btn-danger" value="登出"/>
         </form>

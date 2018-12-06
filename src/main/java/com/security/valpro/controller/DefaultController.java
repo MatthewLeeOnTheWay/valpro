@@ -1,13 +1,17 @@
 package com.security.valpro.controller;
 
 import com.security.valpro.dao.UserDao;
+import com.security.valpro.entity.MdStock;
+import com.security.valpro.service.MdStockService;
 import com.security.valpro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class DefaultController {
@@ -15,7 +19,10 @@ public class DefaultController {
     private UserDao userDao;
     @Autowired
     private UserService userService;
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private MdStockService stockService;
+
+
 	@GetMapping("/")
     public String index() {
         return "/home";
@@ -34,7 +41,9 @@ public class DefaultController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
-    public String user() {
+    public String user(Model model) {
+	    List<MdStock> mdStocks=stockService.findAll();
+	    model.addAttribute("mdStocks",mdStocks);
         return "/user";
     }
 

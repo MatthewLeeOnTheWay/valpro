@@ -1,19 +1,16 @@
 package com.security.valpro.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.security.valpro.utils.DateJsonDeserialize;
-import com.security.valpro.utils.DateJsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(name = "sysUser")
-public class SysUser {
+public class SysUser implements Serializable {
     private Integer id;
     private String password;
     private String username;
