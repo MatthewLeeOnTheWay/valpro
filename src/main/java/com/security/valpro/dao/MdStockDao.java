@@ -14,6 +14,6 @@ public interface MdStockDao extends JpaRepository<MdStock,Integer> {
     @Query(value = "delete from md_stock where id=:stockId",nativeQuery = true)
     int deleteMdStockById(@Param("stockId") int id);
 
-    @Query(value = "select * from md_stock where id=35",nativeQuery = true)
+    @Query(value = "select * from md_stock",nativeQuery = true)
     public List<MdStock> findAll();
 }

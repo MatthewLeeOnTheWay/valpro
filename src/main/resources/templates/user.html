@@ -6,17 +6,16 @@
     <script type="text/javascript" th:src="@{/static/js/pages/main.js}"></script>
 </head>
 <body>
-<!--<div th:replace="fragments/header :: header"></div>-->
 <div layout:fragment="content" th:remove="tag">
     <div class="starter-template" style="text-align: left">
-        <h1>普通用户页面 (受 Spring Security 保护, 需要用户权限)</h1>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <table class="table table-hover table-condensed">
             <legend>
-                <strong>用户列表</strong>
+                <strong>数据列表</strong>
             </legend>
             <thead>
             <tr>
+                <th>ID</th>
                 <th>库存点代号</th>
                 <th>储位</th>
                 <th>货色号</th>
@@ -35,28 +34,62 @@
             </thead>
             <tbody>
             <tr th:each="stock : ${mdStocks}">
-                <th scope="row" th:text="${stock.MDPOTNO}"></th>
-                <td th:text="${stock.STORAGENO}"></td>
-                <td th:text="${stock.PRODUCT}"></td>
-                <td th:text="${stock.MDSIZE}"></td>
-                <td th:text="${stock.STKQTY}"></td>
-                <td th:text="${stock.ONWAYQTY}"></td>
-                <td th:text="${stock.PTRINQTY}"></td>
-                <td th:text="${stock.PTROUTQTY}"></td>
-                <td th:text="${stock.PWHSOUTQTY}"></td>
-                <td th:text="${stock.CREATED_BY}"></td>
-                <td th:text="${stock.CREATION_DATE}"></td>
-                <td th:text="${stock.LAST_UPDATE_BY}"></td>
-                <td th:text="${stock.LAST_UPDATE_DATE}"></td>
-                <td th:text="${stock.REMARK}"></td>
-                <td><a class="btn btn-danger" th:href="@{/users/delete/{stockId}(stockId=${stock.id})}">删除</a></td>
+                <th scope="row"><a data-toggle="modal" data-target="#myModal" th:text="${stock.id}"> </a></th>
+                <td th:text="${stock.mdpotno}"></td>
+                <td th:text="${stock.storageno}"></td>
+                <td th:text="${stock.product}"></td>
+                <td th:text="${stock.mdsize}"></td>
+                <td th:text="${stock.stkqty}"></td>
+                <td th:text="${stock.onwayqty}"></td>
+                <td th:text="${stock.ptrinqty}"></td>
+                <td th:text="${stock.ptroutqty}"></td>
+                <td th:text="${stock.pwhsoutqty}"></td>
+                <td th:text="${stock.createdBy}"></td>
+                <td th:text="${stock.creationDate}"></td>
+                <td th:text="${stock.lastUpdateBy}"></td>
+                <td th:text="${stock.lastUpdateDate}"></td>
+                <td th:text="${stock.remark}"></td>
+                <td><a class="btn btn-danger" th:href="@{/user/delete/{stockId}(stockId=${stock.id})}">删除</a></td>
             </tr>
             </tbody>
         </table>
         <form th:action="@{/logout}" method="post">
+            <input id="referrer" type="text" name="referrer" class="form-control" style="display: none">
             <input type="submit" class="btn btn-danger" value="登出"/>
         </form>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改主档信息：
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    在这里添加一些文本
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <script>
+        if (document.referrer != ''||document.referrer===undefined||document.referrer===null) {
+            // 没有来源页面信息的时候，改成首页URL地址
+            /*$('.jsBack').attr('href', '/');*/
+            $('#referrer').val(document.referrer);
+        }
+    </script>
 </div>
 </body>
 </html>

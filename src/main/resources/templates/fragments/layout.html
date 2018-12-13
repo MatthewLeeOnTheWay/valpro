@@ -17,14 +17,15 @@
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">BoBo</title>
 </head>
 <body>
-    <div style="height: 100%">
-        <th:block th:replace="fragments/header :: header"/>
-        <div class="container">
-            <th:block layout:fragment="content"/>
-        </div>
+<div>
+    <th:block th:replace="fragments/header :: header"/>
+    <div class="container">
+        <th:block layout:fragment="content"/>
     </div>
-    <div style="position: fixed">
+
+    <!--<div style="position: fixed">
         <th:block th:replace="fragments/footer :: footer"/>
-    </div>
+    </div>-->
+</div>
 </body>
 </html>

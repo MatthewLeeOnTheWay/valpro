@@ -1,19 +1,16 @@
-package com.security.valpro.filter;
+package com.security.valpro.filterInteceptor;
 
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.core.annotation.Order;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 //@WebFilter(filterName="testFilter1",urlPatterns = {"/*"})
-@Order(FilterRegistrationBean.LOWEST_PRECEDENCE-1)
+/*@Order(FilterRegistrationBean.LOWEST_PRECEDENCE-1)*/
 public class PageCachingFilter extends SimplePageCachingFilter {
     private final static String FILTER_URL_PATTERNS = "patterns";
     private static String[] cacheURLs;

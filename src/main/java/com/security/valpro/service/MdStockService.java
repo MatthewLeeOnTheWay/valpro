@@ -14,8 +14,8 @@ public class MdStockService {
     @Autowired
     private MdStockDao stockDao;
 
-    public  void deleteById(int stockId){
-        stockDao.deleteMdStockById(stockId);
+    public int deleteById(int stockId){
+        return stockDao.deleteMdStockById(stockId);
     }
 
     public List<MdStock> findAll(){

@@ -42,8 +42,8 @@ public class DefaultController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
     public String user(Model model) {
-	    List<MdStock> mdStocks=stockService.findAll();
-	    model.addAttribute("mdStocks",mdStocks);
+	    List<MdStock> list=stockService.findAll();
+	    model.addAttribute("mdStocks",list);
         return "/user";
     }
 

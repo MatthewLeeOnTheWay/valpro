@@ -5,10 +5,12 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class UpdateTool {
+public class UpdateTool  {
     /**
      * 将目标源中不为空的字段过滤，将数据库中查出的数据源复制到提交的目标源中
      *

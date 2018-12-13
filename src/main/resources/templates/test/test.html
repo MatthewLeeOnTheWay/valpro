@@ -1,85 +1,121 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.thymeleaf.org"
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.thymeleaf.org"
       xmlns:th="http://www.thymeleaf.org"
       layout:decorator="fragments/layout">
 <head>
-    <title>注册页面</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" th:src="@{/static/js/pages/main.js}"></script>
 </head>
-
 <body>
 <div layout:fragment="content" th:remove="tag">
-    <div id="app">
-        <!-- `greet` 是在下面定义的方法名 -->
-        <button v-on:click="greet">Greet</button>
+    <div class="starter-template" style="text-align: left">
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <table class="table table-hover table-condensed">
+            <legend>
+                <strong>数据列表</strong>
+            </legend>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>库存点代号</th>
+                <th>储位</th>
+                <th>货色号</th>
+                <th>尺寸</th>
+                <th>库存量</th>
+                <th>在途量</th>
+                <th>预移入量</th>
+                <th>预移出量</th>
+                <th>预批出量</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>最后修改人</th>
+                <th>最后修改时间</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="stock in mdStocks">
+                <th scope="row">{{stock.id}}</th>
+                <td >{{stock.mdpotno}}</td>
+                <td >{{stock.storageno}}</td>
+                <td >{{stock.product}}</td>
+                <td >{{stock.mdsize}}</td>
+                <td >{{stock.stkqty}}</td>
+                <td >{{stock.onwayqty}}</td>
+                <td >{{stock.ptrinqty}}</td>
+                <td >{{stock.ptroutqty}}</td>
+                <td >{{stock.pwhsoutqty}}</td>
+                <td >{{stock.createdBy}}</td>
+                <td >{{stock.creationDate}}</td>
+                <td >{{stock.lastUpdateBy}}</td>
+                <td >{{stock.lastUpdateDate}}</td>
+                <td >{{stock.remark}}</td>
+                <!--<td><a class="btn btn-danger" th:href="@{/user/delete/{stockId}(stockId=${stock.id})}">删除</a></td>-->
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/logout}" method="post">
+            <input id="referrer" type="text" name="referrer" class="form-control" style="display: none">
+            <input type="submit" class="btn btn-danger" value="登出"/>
+        </form>
     </div>
 
-    <div id="apply">
-        <p>{{username}}</p>
-        <input type="text" class="form-control" placeholder="昵称：" required="true" autofocus="true"
-               name="username" v-model="username" v-on:blur="getUserName('name')">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改主档信息：
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    在这里添加一些文本
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
-    <script >
-        var app = new Vue({
-            el: '#app',
-            data: {
-                name: 'Vue.js'
-            },
-            // 在 `methods` 对象中定义方法
-            methods: {
-                greet: function (event) {
-                    // `this` 在方法里指当前 Vue 实例
-                    alert('Hello ' + this.name + '!')
-                    // `event` 是原生 DOM 事件
-                    if (event) {
-                        alert(event.target.tagName)
-                    }
-                }
-            }
-        })
+    <script>
+        /*if (document.referrer != ''||document.referrer===undefined||document.referrer===null) {
+            // 没有来源页面信息的时候，改成首页URL地址
+            /!*$('.jsBack').attr('href', '/');*!/
+            $('#referrer').val(document.referrer);
+        }*/
 
+        var myModel = {mdStocks: [
+                {id:"1"},{mdpotno:null},{storageno:null},{product:null},{mdsize:null}, {stkqty:null},{onwayqty:null},
+                {ptrinqty:null},{ptroutqty:null},{ pwhsoutqty:null},{createdBy:null},
+                {creationDate:null},{lastUpdateBy:null},{lastUpdateDate:null},{remark:null}]};
         var vue = new Vue({
-            el: "#apply",
-            data: {
-                username: "",
-                password: "",
-                pwdSecond: "",
-                mobile: "",
-                recptYes: true,
-                nameValid: false,
-                mobileValid: false,
-                name: ""
-            },
-            methods: {
-                getUserName: function (message) {
-                    var name = this.username;
-                    if (name != undefined && name != null) {
-                        postName(name);
-                    }
+            el: "#app1",
+            data: myModel,
+            mounted:getData()
+        });
+
+        function getData() {
+            $.ajax({
+                url: "/user/getStockList",                //后端的API地址
+                type: 'POST',                                //http:POST/GET
+                //data: postData,                            //指客户端提交给后台的参数
+                dataType: 'json',                            //服务端返回类型text，JSON
+                timeout: 3000,
+                success: function (result) {
+                    debugger;
+                    vue.mdStocks = result
                 },
-                getMobile: function (message) {
-                    var mobile = this.mobile;
-                    if (mobile != null && mobile != undefined) {
-                        postMobile(mobile)
-                    }
+                error: function () {
+                    alert('服务器忙，请稍候');
                 }
-
-            }
-        })
-
-        function postName(name) {
-            $.post("/checkName", {
-                    name: '123131'
-                },
-                function (data, status) {
-                    alert("你现在终于看到我了:" + data)
-                    var result = $.parseJSON(data);//后台返回的json数据需要转为对象
-                });
-        };
+            });
+        }
     </script>
 </div>
 </body>
