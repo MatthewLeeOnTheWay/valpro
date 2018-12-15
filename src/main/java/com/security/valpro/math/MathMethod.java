@@ -9,10 +9,7 @@ public class MathMethod {
            * @return
            */
     public static int[] bubbleSort(int[] array){
-        return null;
-    }
-
-    public static int[] selectionSort(int[] array){
+        int i=1;
         return null;
     }
 }
