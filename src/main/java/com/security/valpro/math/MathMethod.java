@@ -15,6 +15,4 @@ public class MathMethod {
     public static int[] selectionSort(int[] array){
         return null;
     }
-
-    public static int[] arraySort(int[] array){return null;}
 }
