@@ -5,9 +5,9 @@
 
     <groupId>com.security</groupId>
     <artifactId>valpro</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
-    <url>http://valpro.com</url>
+    <url>http://192.168.24.122/valpro</url>
 
     <name>valpro</name>
     <description>Demo project for Spring Boot</description>
@@ -35,12 +35,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <scope>true</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!--排除默认的tomcat-jdbc-->
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
