@@ -1,10 +1,10 @@
 package com.security.valpro.service;
 
+
 import com.security.valpro.dao.UserDao;
 import com.security.valpro.entity.SysUser;
-import org.hibernate.SQLQuery;
+
 import org.hibernate.Session;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +25,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Map;
 
+@com.alibaba.dubbo.config.annotation.Service
 @Service
 @Transactional
 public class UserService {

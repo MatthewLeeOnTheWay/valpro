@@ -29,7 +29,7 @@ import java.util.List;
  * CustomUserService deliver justice to SimpleGrantedAuthority
  * then god damn ok!
  * */
-//@Service
+
 public class CustomUserService implements UserDetailsService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired

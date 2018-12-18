@@ -1,4 +1,4 @@
-package com.security.valpro.listener;
+package com.security.valpro.base;
 
 import com.security.valpro.utils.ContentEvent;
 import org.springframework.context.ApplicationEvent;
